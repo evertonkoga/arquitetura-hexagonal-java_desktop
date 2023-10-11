@@ -14,12 +14,18 @@ import java.math.BigDecimal;
 import static java.util.Objects.isNull;
 
 // Responsável por desenhar a tela de transferência com a tecnologia javafx.
+@Named
 public class TransferenciaForm {
     private TextField tfDebito;
     private TextField tfNomeDebito;
     private TextField tfCredito;
     private TextField tfNomeCredito;
     private TextField tfValor;
+    private PortaTransferencia porta;
+    @Inject
+    public TransferenciaForm(PortaTransferencia porta) {
+        this.porta = porta;
+    }
     private void limpar() {
         tfDebito.setText("");
         tfNomeDebito.setText("");
@@ -41,6 +47,19 @@ public class TransferenciaForm {
         alert.setContentText(texto);
         alert.showAndWait();
     }
+    private void get(TextField tfEntrada, TextField tfSaida) {
+        try {
+            var conta = porta.getConta(get(tfEntrada.getText()));
+            if (isNull(conta)) {
+                tfSaida.setText("");
+            } else {
+                tfSaida.setText(conta.getCorrentista() + " - Saldo R$ " +
+                        conta.getSaldo());
+            }
+        } catch (Exception e) {
+            mensagem(e.getMessage());
+        }
+    }
     private BigDecimal get() {
         try {
             return new BigDecimal(tfValor.getText());
@@ -55,8 +74,10 @@ public class TransferenciaForm {
         pn.getChildren().add(new Label(" Conta Débito:"));
         tfDebito = new TextField();
         tfDebito.setPrefWidth(50);
+        tfDebito.focusedProperty().addListener((o, v, n) -> {
+            if (!n) get(tfDebito, tfNomeDebito);
+        });
         pn.getChildren().add(tfDebito);
-
         tfNomeDebito = new TextField();
         tfNomeDebito.setPrefWidth(300);
         tfNomeDebito.setEditable(false);
@@ -64,6 +85,9 @@ public class TransferenciaForm {
         pn.getChildren().add(new Label(" Conta Crédito:"));
         tfCredito = new TextField();
         tfCredito.setPrefWidth(50);
+        tfCredito.focusedProperty().addListener((o, v, n) -> {
+            if (!n) get(tfCredito, tfNomeCredito);
+        });
         pn.getChildren().add(tfCredito);
 
         tfNomeCredito = new TextField();
@@ -77,6 +101,8 @@ public class TransferenciaForm {
         var bt = new Button();
         bt.setOnAction((ev) -> {
             try {
+                porta.transferir(get(tfDebito.getText()), get(tfCredito.getText()),
+                        get());
                 limpar();
                 mensagem("Transferência feita com sucesso!");
             } catch (Exception e) {
