@@ -25,6 +25,15 @@
             <systemPath>D:/workspace/estudos/arquitetura-hexagonal-java/arquitetura-hexagonal-java_sistema/out/artifacts/sistema/sistema.jar
             </systemPath>
         </dependency>
+        <!-- Conta Serviço -->
+        <dependency>
+            <groupId>conta.servico</groupId>
+            <artifactId>conta.servico</artifactId>
+            <version>1.0.0</version>
+            <scope>system</scope>
+            <systemPath>D:/workspace/estudos/arquitetura-hexagonal-java/arquitetura-hexagonal-java_servico/out/artifacts/servico/servico.jar
+            </systemPath>
+        </dependency>
         <!-- JavaFx -->
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -48,6 +57,19 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
             <version>${spring}</version>
+        </dependency>
+        <!-- Spring Jdbc -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>${spring}</version>
+        </dependency>
+        <!-- hsqldb -->
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.4.1</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
