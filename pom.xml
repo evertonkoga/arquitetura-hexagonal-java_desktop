@@ -13,6 +13,8 @@
         <maven.compiler.target>12</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring>5.1.6.RELEASE</spring>
+        <javafx.version>17.0.1</javafx.version>
+        <javafx.maven.plugin.version>0.0.8</javafx.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -29,7 +31,7 @@
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-controls</artifactId>
-            <version>12</version>
+            <version>${javafx.version}</version>
         </dependency>
         <!-- CDI -->
         <dependency>
