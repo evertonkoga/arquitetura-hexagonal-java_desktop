@@ -1,6 +1,7 @@
 package br.com.conta.tela;
 
 import br.com.conta.dev.Build2;
+import br.com.conta.hml.Build3;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +14,8 @@ public class AdaptadorJavaFx extends Application {
     @Override
     public void init() {
         System.out.println("iniciando spring..");
-        spring = new AnnotationConfigApplicationContext(Build2.class);
+        // spring = new AnnotationConfigApplicationContext(Build2.class); // Config de Dev
+        spring = new AnnotationConfigApplicationContext(Build3.class);
     }
 
     @Override
